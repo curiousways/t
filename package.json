@@ -1,0 +1,30 @@
+{
+  "name": "tailwind-postcss",
+  "version": "1.0.0",
+  "description": "A simple starter for Tailwind projects, based on [https://github.com/salttechno/tailwindcss-boilerplate](Tailwind CSS Boilerplate)",
+  "main": "gulpfile.js",
+  "scripts": {
+    "dev": "gulp",
+    "build": "NODE_ENV=production gulp css",
+    "build-images": "gulp images"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curiousways/tailwind-postcss.git"
+  },
+  "author": "Curious Ways",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/curiousways/tailwind-postcss/issues"
+  },
+  "homepage": "https://github.com/curiousways/tailwind-postcss#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "browser-sync": "^2.26.14",
+    "gulp": "^4.0.2",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-postcss": "^9.0.0",
+    "postcss": "^8.2.9",
+    "tailwindcss": "^2.1.0"
+  }
+}
