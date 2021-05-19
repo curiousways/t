@@ -1,0 +1,29 @@
+@@include('includes/head.html')
+
+@@include('includes/header.html')
+
+  <!-- Section header -->
+  <div>
+    @@include('includes/section-header.html', {
+      "bg": "",
+      "text_color": "",
+      "title_color": "",
+      "subtitle_color": "",
+      "title": "A section header",
+      "text": ""
+    })
+  </div>
+
+  <!-- Card -->
+  <div>
+   @@loop('includes/card.html', [
+      { "title": "Card title", "services": {"service1": "Bullet list item", "service2": "Bullet list item", "service3": "Bullet list item"}, "icon": "" },
+    ])
+  </div>
+  
+  <!-- Data -->
+  <div>
+    @@loop('includes/data-item.html', 'assets/data.json')
+  </div>
+
+@@include('includes/foot.html')

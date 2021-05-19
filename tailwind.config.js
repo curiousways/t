@@ -1,11 +1,16 @@
 module.exports = {
-  purge: ["./src/**/*.css", "./**/*.html"],
+  purge: ["./src/**/*.css", "./src/**/*.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-black': '#000',
+      },
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+    },
   },
   plugins: [],
 }

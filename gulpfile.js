@@ -1,22 +1,43 @@
+const gulp = require('gulp');
 const { watch, series, src, dest } = require("gulp");
 var browserSync = require("browser-sync").create();
 var postcss = require("gulp-postcss");
+var fileinclude = require("gulp-file-include");
 const imagemin = require("gulp-imagemin");
 
 // Task for compiling our CSS files using PostCSS
 function cssTask(cb) {
-    return src("./src/*.css") // read .css files from ./src/ folder
+    return src("./src/assets/css/*.css") // read .css files from ./src/ folder
         .pipe(postcss()) // compile using postcss
-        .pipe(dest("./assets/css")) // paste them in ./assets/css folder
+        .pipe(dest("./public/assets/css")) // paste them in ./assets/css folder
         .pipe(browserSync.stream());
     cb();
 }
 
 // Task for minifying images
 function imageminTask(cb) {
-    return src("./assets/images/*")
+    return src("./src/assets/images/*")
         .pipe(imagemin())
-        .pipe(dest("./assets/images"));
+        .pipe(dest("./public/assets/images"));
+    cb();
+}
+
+// Task for file includes
+function fileincludeTask(cb) {
+    return src(['./src/*.html'])
+        .pipe(fileinclude({
+          prefix: '@@',
+          basepath: '@file'
+        }))
+        .pipe(gulp.dest('./public'))
+        .pipe(browserSync.stream());
+    cb();
+}
+
+// Task for fonts
+function fontsTask(cb) {
+    return src("./src/assets/fonts/*")
+        .pipe(dest("./public/assets/fonts"));
     cb();
 }
 
@@ -24,7 +45,7 @@ function imageminTask(cb) {
 function browsersyncServe(cb) {
     browserSync.init({
         server: {
-            baseDir: "./",
+            baseDir: "./public/",
         },
     });
     cb();
@@ -37,11 +58,13 @@ function browsersyncReload(cb) {
 
 // Watch Files & Reload browser after tasks
 function watchTask() {
-    watch("./**/*.html", browsersyncReload);
-    watch(["./src/*.css"], series(cssTask, browsersyncReload));
+    watch(["./src/assets/images/*"], series(imageminTask, browsersyncReload));
+    watch(["./src/**/*.css"], series(cssTask, browsersyncReload));
+    watch(["./src/**/*.html"], series(fileincludeTask, browsersyncReload));
 }
 
 // Default Gulp Task
-exports.default = series(cssTask, browsersyncServe, watchTask);
+exports.default = series(fileincludeTask, cssTask, fontsTask, imageminTask, browsersyncServe, watchTask);
 exports.css = cssTask;
 exports.images = imageminTask;
+exports.build = series(fileincludeTask, cssTask, fontsTask, imageminTask);

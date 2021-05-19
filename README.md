@@ -1,6 +1,6 @@
 # Tailwind PostCSS
 
-A simple starter for Tailwind projects, based on https://github.com/salttechno/tailwindcss-boilerplate
+A simple starter for Tailwind projects, based on https://github.com/salttechno/tailwindcss-boilerplate. Uses gulp-file-include for includes, small components, data https://www.npmjs.com/package/gulp-file-include
 
 ## Clone
 

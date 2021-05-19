@@ -1,0 +1,12 @@
+@tailwind base;
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 1ex;
+}
+
+@tailwind components;
+@tailwind utilities;
